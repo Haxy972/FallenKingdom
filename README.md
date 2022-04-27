@@ -19,7 +19,7 @@ Le plugin effectue directement un ``/manuadd <player> <team>``, les noms des éq
 
 # 👇 Installer
 
-La dernière version du plugin se trouve dans [Release Page](https://github.com/Haxy972/FallenKingdom/releases) , ce la vous permet de voir les nouveautés également.
+La dernière version du plugin se trouve dans [Release Page](https://github.com/Haxy972/FallenKingdom/releases) , cela vous permet de voir les nouveautés également.
 
 
 
