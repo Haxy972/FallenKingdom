@@ -14,7 +14,7 @@ Le plugin ainsi que le nom des équipes **(4 maximum)** fonctionnent avec [Group
 
 # 🚩 GroupManager
 
-Les groupes suivants sont a créer, ``Rouge``, ``Bleu``, ``Vert``, ``Jaune`` dans **GroupManager**, afin d'avoir les permissions pour qu'elle s'affiche en jeu.
+Les groupes suivants sont a créer, ``Rouge``, ``Bleu``, ``Vert``, ``Jaune`` et ``Mort`` dans **GroupManager**, afin d'avoir les permissions pour qu'elle s'affiche en jeu.
 Le plugin effectue directement un ``/manuadd <player> <team>``, les noms des équipes écrites plus haut sont donc importants a retranscrire fidèlement.
 
 # 👇 Installer
