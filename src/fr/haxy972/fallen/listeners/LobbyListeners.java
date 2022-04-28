@@ -7,7 +7,6 @@ import fr.haxy972.fallen.Scoreboard.ScoreboardManager;
 import fr.haxy972.fallen.manager.GameManager;
 import fr.haxy972.fallen.utils.MessageYaml;
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Entity;
@@ -31,6 +30,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.haxy972.fallen.GameStatut;
 import fr.haxy972.fallen.Team.select.TeamSelect;
+import org.bukkit.scoreboard.Team;
 
 public class LobbyListeners implements Listener {
 
@@ -55,13 +55,15 @@ public class LobbyListeners implements Listener {
 
     @EventHandler
     public void onPlaceBreak(BlockPlaceEvent event) {
+        if (!GameStatut.isStatut(GameStatut.LOBBY)) {
+            return;
+        }
         if (GameStatut.isStatut(GameStatut.LOBBY)) {
             event.setCancelled(true);
             if ((event.getBlock().getType() != Material.WOOL) && (event.getBlock().getType() != Material.BARRIER)) {
                 Player player = event.getPlayer();
                 player.sendMessage(MessageYaml.getValue("messages.partie.lobby.block-place-break").replace("&", "§"));
             }
-
 
 
         }
@@ -184,17 +186,22 @@ public class LobbyListeners implements Listener {
         }
 
         event.setCancelled(true);
-        if(item instanceof Block) {
-            if (item.getType().equals(Material.WOOL)) {
-                if ((item.getItemMeta().getDisplayName().equals("§b§lEquipe§8» §7Aucune")) || (item.getItemMeta().getDisplayName().equals("§b§lEquipe§8» §c§lROUGE")) || (item.getItemMeta().getDisplayName().equals("§b§lEquipe§8» §9§lBLEU")) || (item.getItemMeta().getDisplayName().equals("§b§lEquipe§8» §a§lVERT")) || (item.getItemMeta().getDisplayName().equals("§b§lEquipe§8» §e§lJAUNE"))) {
+        switch (item.getType()) {
+            case WOOL:
+                if ((item.getItemMeta().getDisplayName() == "§b§lEquipe§8» §7Aucune") || (item.getItemMeta().getDisplayName() == "§b§lEquipe§8» §c§lROUGE") || (item.getItemMeta().getDisplayName() == "§b§lEquipe§8» §9§lBLEU") || (item.getItemMeta().getDisplayName() == "§b§lEquipe§8» §a§lVERT") || (item.getItemMeta().getDisplayName() == "§b§lEquipe§8» §e§lJAUNE")) {
                     if ((action == Action.RIGHT_CLICK_AIR) || (action == Action.RIGHT_CLICK_BLOCK)) {
                         player.closeInventory();
                         openTeamInventory(player);
 
                     }
                 }
-            }
+
+                break;
+
+            default:
+                break;
         }
+
 
     }
 
@@ -202,7 +209,7 @@ public class LobbyListeners implements Listener {
         if (!GameStatut.isStatut(GameStatut.LOBBY)) {
             return;
         }
-        Inventory inventory = Bukkit.createInventory(null, 9, "§7§b§lEquipes");
+        Inventory inventory = Bukkit.createInventory(null, 9 * 1, "§7§b§lEquipes");
         //Rouge
         int i = 0;
         for (Player players : Bukkit.getOnlinePlayers()) {
@@ -226,7 +233,7 @@ public class LobbyListeners implements Listener {
 
         int counter = 0;
         for (Player players : Bukkit.getOnlinePlayers()) {
-            if (TeamSelect.team.get(players).equals("rouge")) {
+            if (TeamSelect.team.get(players) == "rouge") {
                 rougelore.add("§8» §7" + players.getName());
                 counter++;
             }
@@ -264,7 +271,7 @@ public class LobbyListeners implements Listener {
 
         counter = 0;
         for (Player players : Bukkit.getOnlinePlayers()) {
-            if (TeamSelect.team.get(players).equals("bleu")) {
+            if (TeamSelect.team.get(players) == "bleu") {
                 bleulore.add("§8» §7" + players.getName());
                 counter++;
             }
@@ -301,7 +308,7 @@ public class LobbyListeners implements Listener {
 
         counter = 0;
         for (Player players : Bukkit.getOnlinePlayers()) {
-            if (TeamSelect.team.get(players).equals("vert")) {
+            if (TeamSelect.team.get(players) == "vert") {
                 vertlore.add("§8» §7" + players.getName());
                 counter++;
             }
@@ -338,7 +345,7 @@ public class LobbyListeners implements Listener {
 
         counter = 0;
         for (Player players : Bukkit.getOnlinePlayers()) {
-            if (TeamSelect.team.get(players).equals("jaune")) {
+            if (TeamSelect.team.get(players) == "jaune") {
                 jaunelore.add("§8» §7" + players.getName());
                 counter++;
             }
@@ -400,7 +407,7 @@ public class LobbyListeners implements Listener {
                 }
                 break;
             case BARRIER:
-                if (it.getItemMeta().getDisplayName().equals("§7Aucune")) {
+                if (it.getItemMeta().getDisplayName() == "§7Aucune") {
                     new TeamSelect(player).setTeam("reset");
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
                     player.closeInventory();
@@ -412,6 +419,9 @@ public class LobbyListeners implements Listener {
 
     @EventHandler
     public void onWeatherChange(WeatherChangeEvent event) {
+        if (!GameStatut.isStatut(GameStatut.LOBBY)) {
+            return;
+        }
         if (GameStatut.isStatut(GameStatut.LOBBY)) {
             event.setCancelled(true);
         }

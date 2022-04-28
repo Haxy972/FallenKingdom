@@ -6,16 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="852c4563-a572-4659-a413-5399c8f6f469" name="Changes" comment="Ajout de l'auteur (oublié)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="852c4563-a572-4659-a413-5399c8f6f469" name="Changes" comment="Added Grade Option to config.yml">
       <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/Team/select/TeamSelect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/Team/select/TeamSelect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/listeners/GameListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/listeners/GameListeners.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/listeners/LobbyListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/listeners/LobbyListeners.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/listeners/onPlayerJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/listeners/onPlayerJoinListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/manager/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/manager/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/runnable/DeathRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/runnable/DeathRunnable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/utils/MessageYaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/utils/MessageYaml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/commands/CommandsDebug.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,21 +64,7 @@
       <option name="project" value="LOCAL" />
       <updated>1651144162039</updated>
     </task>
-    <task id="LOCAL-00002" summary="Suppression du Commands Debug">
-      <created>1651144594464</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1651144594465</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Ajout de l'auteur (oublié)">
-      <created>1651144639211</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1651144639211</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -100,8 +80,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Grade Option to config.yml" />
-    <MESSAGE value="Suppression du Commands Debug" />
-    <MESSAGE value="Ajout de l'auteur (oublié)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout de l'auteur (oublié)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Grade Option to config.yml" />
   </component>
 </project>

@@ -1,5 +1,6 @@
 package fr.haxy972.fallen.utils;
 
+import fr.haxy972.fallen.Main;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -79,7 +80,8 @@ public class MessageYaml {
             File file = new File("plugins/FallenKingdom/message.yml");
             YamlConfiguration yaml = new YamlConfiguration();
             yaml.load(file);
-            return yaml.getString(key);
+            String value = yaml.getString(key);
+            return value;
         } catch (Exception e) {
             e.printStackTrace();
 
