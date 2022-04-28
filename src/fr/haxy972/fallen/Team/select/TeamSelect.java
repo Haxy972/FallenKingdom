@@ -149,9 +149,9 @@ public class TeamSelect {
                 if (!(TeamSelect.team.containsKey(player))) {
                     ((Map<Player, String>) TeamSelect.team).put(player, team);
                     if(Main.INSTANCE.getConfig().getBoolean("grades")) {
-                        player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§a§lVERT"));
+                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " vert");
                     }
-                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " vert");
+                    player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§a§lVERT"));
                     TeamSelect.rougeNumber++;
                     if (GameStatut.isStatut(GameStatut.LOBBY)) {
                         giveLobbyLaine(player, team);
