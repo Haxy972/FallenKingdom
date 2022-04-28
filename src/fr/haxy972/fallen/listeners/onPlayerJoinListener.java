@@ -17,6 +17,8 @@ import fr.haxy972.fallen.Main;
 import fr.haxy972.fallen.Scoreboard.ScoreboardManager;
 import fr.haxy972.fallen.utils.TitleManager;
 
+import java.util.ArrayList;
+
 public class onPlayerJoinListener implements Listener {
 
 
@@ -95,7 +97,18 @@ public class onPlayerJoinListener implements Listener {
         it.setItemMeta(im);
         player.getInventory().setItem(4, it);
 
+        if(player.hasPermission("fallen.timer")){
+            it = new ItemStack(Material.BLAZE_ROD);
+            im = it.getItemMeta();
+            im.setDisplayName("§bDémarrage");
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("§7Permet de lancer la partie de force");
 
+            im.setLore(lore);
+            it.setItemMeta(im);
+            player.getInventory().setItem(8, it);
+
+        }
     }
 
 }

@@ -7,9 +7,6 @@
 # Les roles seront automatique détecté par le plugin et donné au joueur si vous ACTIVEZ CETTE FONCTIONNALITEE.
 grades: true
 
-
-
-
 messages:
   prefix: "&6&lFallen&b&lKingdom&8» "
 

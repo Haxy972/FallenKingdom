@@ -198,6 +198,17 @@ public class LobbyListeners implements Listener {
 
                 break;
 
+            case BLAZE_ROD:
+                if(item.getItemMeta().getDisplayName().equalsIgnoreCase("§bDémarrage")){
+                    if ((action == Action.RIGHT_CLICK_AIR) || (action == Action.RIGHT_CLICK_BLOCK)) {
+                        player.performCommand("forcestart");
+                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_PLING, 1f, 1f);
+                        player.getInventory().remove(item);
+                    }
+                }
+
+                break;
+
             default:
                 break;
         }

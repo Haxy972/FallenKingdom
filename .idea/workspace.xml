@@ -7,9 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="852c4563-a572-4659-a413-5399c8f6f469" name="Changes" comment="Added Grade Option to config.yml">
-      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/commands/CommandsDebug.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/listeners/LobbyListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/listeners/LobbyListeners.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/listeners/onPlayerJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/listeners/onPlayerJoinListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/runnable/restartRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/runnable/restartRunnable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
