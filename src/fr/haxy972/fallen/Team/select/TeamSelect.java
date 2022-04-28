@@ -51,8 +51,9 @@ public class TeamSelect {
                     ((Map<Player, String>) TeamSelect.team).put(player, team);
 
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§c§lROUGE"));
-                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " rouge");
-
+                    if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " rouge");
+                    }
                     TeamSelect.rougeNumber++;
                     if (GameStatut.isStatut(GameStatut.LOBBY)) {
                         giveLobbyLaine(player, team);
@@ -71,7 +72,9 @@ public class TeamSelect {
                         }
                         TeamSelect.team.replace(player, team);
                         player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§c§lROUGE"));
-                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " rouge");
+                        if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                            Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " rouge");
+                        }
                         giveLobbyLaine(player, team);
                     } else {
                         player.sendMessage(MessageYaml.getValue("messages.team.already").replace("&", "§"));
@@ -97,7 +100,9 @@ public class TeamSelect {
                     ((Map<Player, String>) TeamSelect.team).put(player, team);
 
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§9§lBLEU"));
-                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " bleu");
+                    if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " bleu");
+                    }
                     TeamSelect.rougeNumber++;
                     if (GameStatut.isStatut(GameStatut.LOBBY)) {
                         giveLobbyLaine(player, team);
@@ -115,7 +120,9 @@ public class TeamSelect {
                             TeamSelect.jauneNumber--;
                         }
                         TeamSelect.team.replace(player, team);
-                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " bleu");
+                        if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                            Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " bleu");
+                        }
                         player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§9§lBLEU"));                        giveLobbyLaine(player, team);
 
                     } else {
@@ -141,8 +148,9 @@ public class TeamSelect {
             if (vertNumber < vertMaxNumber) {
                 if (!(TeamSelect.team.containsKey(player))) {
                     ((Map<Player, String>) TeamSelect.team).put(player, team);
-
-                    player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§a§lVERT"));
+                    if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                        player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§a§lVERT"));
+                    }
                     Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " vert");
                     TeamSelect.rougeNumber++;
                     if (GameStatut.isStatut(GameStatut.LOBBY)) {
@@ -162,7 +170,9 @@ public class TeamSelect {
                         }
                         TeamSelect.team.replace(player, team);
                         player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§a§lVERT"));
-                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " vert");
+                        if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                            Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " vert");
+                        }
                         giveLobbyLaine(player, team);
 
                     } else {
@@ -192,7 +202,9 @@ public class TeamSelect {
                     ((Map<Player, String>) TeamSelect.team).put(player, team);
 
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§e§lJAUNE"));
-                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " jaune");
+                    if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " jaune");
+                    }
                     TeamSelect.rougeNumber++;
                     if (GameStatut.isStatut(GameStatut.LOBBY)) {
                         giveLobbyLaine(player, team);
@@ -211,7 +223,9 @@ public class TeamSelect {
                         }
                         TeamSelect.team.replace(player, team);
                         player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§e§lJAUNE"));                        giveLobbyLaine(player, team);
-                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " jaune");
+                        if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                            Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " jaune");
+                        }
                     } else {
                         player.sendMessage(MessageYaml.getValue("messages.team.already").replace("&", "§"));
                     }
@@ -240,7 +254,9 @@ public class TeamSelect {
                     TeamSelect.jauneNumber--;
                 }
                 player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.leave").replace("&", "§"));
-                Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " joueur");
+                if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " joueur");
+                }
                 giveLobbyLaine(player, team);
 
                 TeamSelect.team.remove(player);

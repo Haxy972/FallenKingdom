@@ -48,19 +48,27 @@ public class GameManager {
                 players.playSound(players.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
                 if (TeamSelect.team.get(players).equalsIgnoreCase("rouge")) {
                     players.teleport(Main.getSpawnRed());
-                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + players.getName() + " rouge");
+                    if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + players.getName() + " rouge");
+                    }
                 }
                 if (TeamSelect.team.get(players).equalsIgnoreCase("bleu")) {
                     players.teleport(Main.getSpawnBlue());
-                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + players.getName() + " bleu");
+                    if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + players.getName() + " bleu");
+                    }
                 }
                 if (TeamSelect.team.get(players).equalsIgnoreCase("vert")) {
                     players.teleport(Main.getSpawnGreen());
-                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + players.getName() + " vert");
+                    if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + players.getName() + " vert");
+                    }
                 }
                 if (TeamSelect.team.get(players).equalsIgnoreCase("jaune")) {
                     players.teleport(Main.getSpawnYellow());
-                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + players.getName() + " jaune");
+                    if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + players.getName() + " jaune");
+                    }
                 }
                 players.setInvulnerable(false);
                 players.setHealth(20);

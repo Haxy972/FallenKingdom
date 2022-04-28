@@ -31,14 +31,18 @@ public class DeathRunnable extends BukkitRunnable {
         if (TeamSelect.team.get(player).equalsIgnoreCase("rouge")) {
             if (!daysRunnable.redbedalive) {
                 player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.bed-destroyed").replace("&", "§"));
-                Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                }
                 TeamSelect.team.remove(player);
                 this.cancel();
             }
         } else if (TeamSelect.team.get(player).equalsIgnoreCase("bleu")) {
             if (!daysRunnable.bluebedalive) {
                 player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.bed-destroyed").replace("&", "§"));
-                Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                }
                 TeamSelect.team.remove(player);
                 this.cancel();
             }
@@ -46,14 +50,19 @@ public class DeathRunnable extends BukkitRunnable {
         } else if (TeamSelect.team.get(player).equalsIgnoreCase("vert")) {
             if (!daysRunnable.greenbedalive) {
                 player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.bed-destroyed").replace("&", "§"));
-                Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                    if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                    }                }
                 TeamSelect.team.remove(player);
                 this.cancel();
             }
         } else if (TeamSelect.team.get(player).equalsIgnoreCase("jaune")) {
             if (!daysRunnable.yellowbedalive) {
                 player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.bed-destroyed").replace("&", "§"));
-                Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                }
                 TeamSelect.team.remove(player);
                 this.cancel();
             }
@@ -66,7 +75,9 @@ public class DeathRunnable extends BukkitRunnable {
                     player.teleport(Main.getSpawnRed());
                 } else {
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.cant-respawn").replace("&", "§"));
-                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                    if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                    }
                     TeamSelect.team.remove(player);
                 }
             }
@@ -75,7 +86,9 @@ public class DeathRunnable extends BukkitRunnable {
                     player.teleport(Main.getSpawnBlue());
                 } else {
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.cant-respawn").replace("&", "§"));
-                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                    if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                    }
                     TeamSelect.team.remove(player);
                 }
             }
@@ -84,7 +97,9 @@ public class DeathRunnable extends BukkitRunnable {
                     player.teleport(Main.getSpawnGreen());
                 } else {
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.cant-respawn").replace("&", "§"));
-                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                    if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                    }
                     TeamSelect.team.remove(player);
                 }
             }
@@ -93,7 +108,9 @@ public class DeathRunnable extends BukkitRunnable {
                     player.teleport(Main.getSpawnYellow());
                 } else {
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.cant-respawn").replace("&", "§"));
-                    Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                    if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+                        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
+                    }
                     TeamSelect.team.remove(player);
                 }
             }

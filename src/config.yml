@@ -1,5 +1,15 @@
 #--------------PLUGIN CREATED BY HAXY972-------------------------
 # Messages relatifs au plugin
+
+
+# IMPORTANT: Pour le nom des équipes veuillez ajouter les groupes suivants dans votre GroupManager: "Rouge", "Bleu", "Vert", "Jaune", "Mort" et "Joueur"
+# Il vous suffira ensuite avec d'ajouter des permissions NameTagEdit à ces groupes.
+# Les roles seront automatique détecté par le plugin et donné au joueur si vous ACTIVEZ CETTE FONCTIONNALITEE.
+grades: true
+
+
+
+
 messages:
   prefix: "&6&lFallen&b&lKingdom&8» "
 

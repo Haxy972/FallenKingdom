@@ -35,7 +35,9 @@ public class onPlayerJoinListener implements Listener {
 
         }
 
-        Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " Joueur");
+        if(Main.INSTANCE.getConfig().getBoolean("grades")) {
+            Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " Joueur");
+        }
         event.setJoinMessage("");
         sendJoinMessage(player);
         player.getInventory().clear();
