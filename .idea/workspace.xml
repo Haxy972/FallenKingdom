@@ -6,13 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="852c4563-a572-4659-a413-5399c8f6f469" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/Team/select/TeamSelect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/Team/select/TeamSelect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/listeners/onPlayerJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/listeners/onPlayerJoinListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/manager/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/manager/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/runnable/DeathRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/runnable/DeathRunnable.java" afterDir="false" />
+    <list default="true" id="852c4563-a572-4659-a413-5399c8f6f469" name="Changes" comment="Added Grade Option to config.yml">
+      <change beforePath="$PROJECT_DIR$/src/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +55,29 @@
       <option name="presentableId" value="Default" />
       <updated>1650203195533</updated>
     </task>
+    <task id="LOCAL-00001" summary="Added Grade Option to config.yml">
+      <created>1651144162039</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1651144162039</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added Grade Option to config.yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Grade Option to config.yml" />
   </component>
 </project>
