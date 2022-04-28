@@ -21,7 +21,7 @@ public class DeathRunnable extends BukkitRunnable {
     public void run() {
         timer--;
         if (timer == 0) {
-            TitleManager.sendActionBar(player, "§eRéapparition dans " + timer + getSeconds(timer));
+            TitleManager.sendActionBar(player, "§eRéapparition en cours");
         } else {
             TitleManager.sendActionBar(player, "§eRéapparition dans " + timer + getSeconds(timer));
         }
@@ -103,7 +103,7 @@ public class DeathRunnable extends BukkitRunnable {
 
 
     private String getSeconds(int timer) {
-        if (timer == 1) {
+        if (timer == 1 || timer == 0) {
             return " seconde";
         } else {
             return " secondes";
