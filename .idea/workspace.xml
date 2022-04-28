@@ -7,7 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="852c4563-a572-4659-a413-5399c8f6f469" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/runnable/DeathRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/runnable/DeathRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/haxy972/fallen/utils/MessageYaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/haxy972/fallen/utils/MessageYaml.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

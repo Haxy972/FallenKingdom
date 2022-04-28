@@ -39,6 +39,8 @@ public class MessageYaml {
                 yaml.set("messages.team.full", "&c&lERREUR&8» &7L'équipe {team} &7est pleine");
                 yaml.set("messages.team.leave", "&7Vous avez quitté votre équipe");
                 yaml.set("messages.team.team-less", "&c&lERREUR&8» &7Vous n'êtes pas dans une équipe");
+                yaml.set("messages.team.bed-destroyed", "&cVous ne pouvez plus réapparaitre, votre nexus est détruit");
+                yaml.set("messages.team.cant-respawn", "&c&lERREUR&8» &7Votre nexus a été détruit, réapparition impossible");
                 yaml.set("messages.death.title", "&c&lMort");
                 yaml.set("messages.death.subtitle", "&7Vous allez réapparaître");
                 yaml.set("messages.nether.error-nether", "&c&lERREUR&8» &7Les portails ne sont pas encore activés &c(JOUR {jour})");

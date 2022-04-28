@@ -1,5 +1,6 @@
 package fr.haxy972.fallen.runnable;
 
+import fr.haxy972.fallen.utils.MessageYaml;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -29,14 +30,14 @@ public class DeathRunnable extends BukkitRunnable {
 
         if (TeamSelect.team.get(player).equalsIgnoreCase("rouge")) {
             if (!daysRunnable.redbedalive) {
-                player.sendMessage(Main.getPrefix() + "§cVous ne pouvez plus réapparaitre, votre nexus est détruit");
+                player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.bed-destroyed").replace("&", "§"));
                 Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
                 TeamSelect.team.remove(player);
                 this.cancel();
             }
         } else if (TeamSelect.team.get(player).equalsIgnoreCase("bleu")) {
             if (!daysRunnable.bluebedalive) {
-                player.sendMessage(Main.getPrefix() + "§cVous ne pouvez plus réapparaitre, votre nexus est détruit");
+                player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.bed-destroyed").replace("&", "§"));
                 Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
                 TeamSelect.team.remove(player);
                 this.cancel();
@@ -44,14 +45,14 @@ public class DeathRunnable extends BukkitRunnable {
 
         } else if (TeamSelect.team.get(player).equalsIgnoreCase("vert")) {
             if (!daysRunnable.greenbedalive) {
-                player.sendMessage(Main.getPrefix() + "§cVous ne pouvez plus réapparaitre, votre nexus est détruit");
+                player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.bed-destroyed").replace("&", "§"));
                 Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
                 TeamSelect.team.remove(player);
                 this.cancel();
             }
         } else if (TeamSelect.team.get(player).equalsIgnoreCase("jaune")) {
             if (!daysRunnable.yellowbedalive) {
-                player.sendMessage(Main.getPrefix() + "§cVous ne pouvez plus réapparaitre, votre nexus est détruit");
+                player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.bed-destroyed").replace("&", "§"));
                 Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
                 TeamSelect.team.remove(player);
                 this.cancel();
@@ -64,7 +65,7 @@ public class DeathRunnable extends BukkitRunnable {
                 if (daysRunnable.redbedalive) {
                     player.teleport(Main.getSpawnRed());
                 } else {
-                    player.sendMessage("§c§lERREUR§8» §7Votre nexus a été détruit, réapparition impossible");
+                    player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.cant-respawn").replace("&", "§"));
                     Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
                     TeamSelect.team.remove(player);
                 }
@@ -73,7 +74,7 @@ public class DeathRunnable extends BukkitRunnable {
                 if (daysRunnable.bluebedalive) {
                     player.teleport(Main.getSpawnBlue());
                 } else {
-                    player.sendMessage("§c§lERREUR§8» §7Votre nexus a été détruit, réapparition impossible");
+                    player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.cant-respawn").replace("&", "§"));
                     Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
                     TeamSelect.team.remove(player);
                 }
@@ -82,7 +83,7 @@ public class DeathRunnable extends BukkitRunnable {
                 if (daysRunnable.greenbedalive) {
                     player.teleport(Main.getSpawnGreen());
                 } else {
-                    player.sendMessage("§c§lERREUR§8» §7Votre nexus a été détruit, réapparition impossible");
+                    player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.cant-respawn").replace("&", "§"));
                     Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
                     TeamSelect.team.remove(player);
                 }
@@ -91,7 +92,7 @@ public class DeathRunnable extends BukkitRunnable {
                 if (daysRunnable.yellowbedalive) {
                     player.teleport(Main.getSpawnYellow());
                 } else {
-                    player.sendMessage("§c§lERREUR§8» §7Votre nexus a été détruit, réapparition impossible");
+                    player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.cant-respawn").replace("&", "§"));
                     Main.INSTANCE.getServer().dispatchCommand(Main.INSTANCE.getServer().getConsoleSender(), "manuadd " + player.getName() + " mort");
                     TeamSelect.team.remove(player);
                 }
