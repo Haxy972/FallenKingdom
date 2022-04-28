@@ -12,8 +12,6 @@ commands:
   previousday:
     description: Reculer la partie d'un jour
     permission: fallen.daycontrol
-  reset:
-    description: ez
   stats:
     description: Voir vos statistique en cours de jeu
     aliases: statistiques, statistique

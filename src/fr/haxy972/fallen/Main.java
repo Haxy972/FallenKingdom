@@ -7,15 +7,12 @@ import fr.haxy972.fallen.utils.MessageYaml;
 import fr.haxy972.fallen.utils.RefresherConfig;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import fr.haxy972.fallen.commands.CommandsDebug;
 import fr.haxy972.fallen.commands.CommandsTimer;
-import fr.haxy972.fallen.manager.GameManager;
 import fr.haxy972.fallen.manager.ListenersManager;
 import fr.haxy972.fallen.utils.RefresherLobby;
 
@@ -31,7 +28,6 @@ public class Main extends JavaPlugin {
         saveDefaultConfig();
         new ListenersManager(INSTANCE).registerEvent();
         GameListeners.onCraft();
-        getCommand("reset").setExecutor(new CommandsDebug());
         getCommand("forcestart").setExecutor(new CommandsTimer());
         getCommand("nextday").setExecutor(new CommandsTimer());
         getCommand("previousday").setExecutor(new CommandsTimer());
