@@ -30,9 +30,6 @@ public class TeamSelect {
     public static int jauneMaxNumber = Main.INSTANCE.getConfig().getInt("teams.max-players-per-team");
 
 
-    public TeamSelect() {
-    }
-
     public TeamSelect(Player player) {
         this.player = player;
     }
@@ -48,7 +45,7 @@ public class TeamSelect {
             }
             if (rougeNumber < rougeMaxNumber) {
                 if (!(TeamSelect.team.containsKey(player))) {
-                    ((Map<Player, String>) TeamSelect.team).put(player, team);
+                    TeamSelect.team.put(player, team);
 
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§c§lROUGE"));
                     if(Main.INSTANCE.getConfig().getBoolean("grades")) {
@@ -59,7 +56,7 @@ public class TeamSelect {
                         giveLobbyLaine(player, team);
                     }
                 } else {
-                    if (TeamSelect.team.get(player) != team) {
+                    if (!TeamSelect.team.get(player).equals(team)) {
                         String str = TeamSelect.team.get(player);
                         if (str.equalsIgnoreCase("bleu")) {
                             TeamSelect.bleuNumber--;
@@ -97,7 +94,7 @@ public class TeamSelect {
             }
             if (bleuNumber < bleuMaxNumber) {
                 if (!(TeamSelect.team.containsKey(player))) {
-                    ((Map<Player, String>) TeamSelect.team).put(player, team);
+                    TeamSelect.team.put(player, team);
 
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§9§lBLEU"));
                     if(Main.INSTANCE.getConfig().getBoolean("grades")) {
@@ -108,7 +105,7 @@ public class TeamSelect {
                         giveLobbyLaine(player, team);
                     }
                 } else {
-                    if (TeamSelect.team.get(player) != team) {
+                    if (!TeamSelect.team.get(player).equals(team)) {
                         String str = TeamSelect.team.get(player);
                         if (str.equalsIgnoreCase("rouge")) {
                             TeamSelect.rougeNumber--;
@@ -147,7 +144,7 @@ public class TeamSelect {
 
             if (vertNumber < vertMaxNumber) {
                 if (!(TeamSelect.team.containsKey(player))) {
-                    ((Map<Player, String>) TeamSelect.team).put(player, team);
+                    TeamSelect.team.put(player, team);
                     if(Main.INSTANCE.getConfig().getBoolean("grades")) {
                         player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§a§lVERT"));
                     }
@@ -157,7 +154,7 @@ public class TeamSelect {
                         giveLobbyLaine(player, team);
                     }
                 } else {
-                    if (TeamSelect.team.get(player) != team) {
+                    if (!TeamSelect.team.get(player).equals(team)) {
                         String str = TeamSelect.team.get(player);
                         if (str.equalsIgnoreCase("rouge")) {
                             TeamSelect.rougeNumber--;
@@ -199,7 +196,7 @@ public class TeamSelect {
 
             if (jauneNumber < jauneMaxNumber) {
                 if (!(TeamSelect.team.containsKey(player))) {
-                    ((Map<Player, String>) TeamSelect.team).put(player, team);
+                    TeamSelect.team.put(player, team);
 
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.team.joined").replace("&", "§").replace("{team}", "§e§lJAUNE"));
                     if(Main.INSTANCE.getConfig().getBoolean("grades")) {
@@ -210,7 +207,7 @@ public class TeamSelect {
                         giveLobbyLaine(player, team);
                     }
                 } else {
-                    if (TeamSelect.team.get(player) != team) {
+                    if (!TeamSelect.team.get(player).equals(team)) {
                         String str = TeamSelect.team.get(player);
                         if (str.equalsIgnoreCase("rouge")) {
                             TeamSelect.rougeNumber--;
@@ -310,14 +307,7 @@ public class TeamSelect {
         }
     }
 
-    public String getTeam(Player player) {
-        if (TeamSelect.team.containsKey(player)) {
-            return TeamSelect.team.get(player);
-        } else {
-            return null;
-        }
 
-    }
 
 
 }

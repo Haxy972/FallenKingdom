@@ -1,18 +1,8 @@
 package fr.haxy972.fallen.manager;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
-
-import fr.haxy972.fallen.utils.ChestRefill;
 import fr.haxy972.fallen.utils.MessageYaml;
-import org.apache.commons.io.FileUtils;
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Entity;
@@ -89,27 +79,23 @@ public class GameManager {
                     }
                 }
             }
-            Bukkit.getScheduler().runTaskLater(Main.INSTANCE, new Runnable() {
-
-                @Override
-                public void run() {
-                    new ScoreboardManager(players).loadScoreboardGame();
-                    checkForBeacon();
-                    for(Chunk chunk : Main.getWorld().getLoadedChunks()){
-                        for(BlockState bs : chunk.getTileEntities()){
-                            if(bs instanceof Chest){
-                                Chest chest = (Chest) bs;
-                                chest.getInventory().clear();
-                                if(!chestsloc.contains(bs.getLocation())) {
-                                    chestsloc.add(bs.getLocation());
-                                }
-
+            Bukkit.getScheduler().runTaskLater(Main.INSTANCE, () -> {
+                new ScoreboardManager(players).loadScoreboardGame();
+                checkForBeacon();
+                for(Chunk chunk : Main.getWorld().getLoadedChunks()){
+                    for(BlockState bs : chunk.getTileEntities()){
+                        if(bs instanceof Chest){
+                            Chest chest = (Chest) bs;
+                            chest.getInventory().clear();
+                            if(!chestsloc.contains(bs.getLocation())) {
+                                chestsloc.add(bs.getLocation());
                             }
+
                         }
                     }
-
                 }
-            }, 1 * 20);
+
+            }, 20);
 
 
         }
@@ -184,7 +170,7 @@ public class GameManager {
             }
         }
         if (i == 0) {
-            if(Main.INSTANCE.getConfig().getBoolean("debug") == false){
+            if(!Main.INSTANCE.getConfig().getBoolean("debug")){
                 byellow.getBlock().setType(Material.AIR);
             }
 
@@ -197,16 +183,16 @@ public class GameManager {
         Location bvert = Main.getBeaconGreen();
         Location bjaune = Main.getBeaconYellow();
 
-        if(team == "rouge"){
+        if(team.equals("rouge")){
             brouge.getBlock().setType(Material.AIR);
         }
-        if(team == "bleu"){
+        if(team.equals("bleu")){
             bbleu.getBlock().setType(Material.AIR);
         }
-        if(team == "vert"){
+        if(team.equals("vert")){
             bvert.getBlock().setType(Material.AIR);
         }
-        if(team == "jaune"){
+        if(team.equals("rouge")){
             bjaune.getBlock().setType(Material.AIR);
         }
 

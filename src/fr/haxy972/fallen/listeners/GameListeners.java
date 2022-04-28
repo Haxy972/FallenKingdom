@@ -28,9 +28,7 @@ import fr.haxy972.fallen.runnable.daysRunnable;
 import fr.haxy972.fallen.utils.TitleManager;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.scoreboard.Team;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class GameListeners implements Listener {
@@ -52,9 +50,9 @@ public class GameListeners implements Listener {
 
                 Bukkit.getScheduler().runTaskLater(Main.INSTANCE, new Runnable() {
 
-                    Material mat = block.getType();
+                    final Material mat = block.getType();
                     @SuppressWarnings("deprecation")
-                    byte matid = block.getData();
+                    final byte matid = block.getData();
 
                     @SuppressWarnings("deprecation")
                     @Override
@@ -66,18 +64,14 @@ public class GameListeners implements Listener {
                 }, 1 / 1000000000);
             }
         }
-        Bukkit.getScheduler().runTaskLater(Main.INSTANCE, new Runnable() {
-
-            @Override
-            public void run() {
-                for(Entity entity : event.getLocation().getChunk().getEntities()){
-                    if(entity instanceof Item){
-                        entity.remove();
-                    }
-
+        Bukkit.getScheduler().runTaskLater(Main.INSTANCE, () -> {
+            for(Entity entity : event.getLocation().getChunk().getEntities()){
+                if(entity instanceof Item){
+                    entity.remove();
                 }
+
             }
-        },1*20);
+        },20);
 
 
 
@@ -115,7 +109,7 @@ public class GameListeners implements Listener {
         Player player = event.getPlayer();
 
         if (TeamSelect.team.containsKey(player)) {
-            if (TeamSelect.team.get(player) == "rouge") {
+            if (TeamSelect.team.get(player).equals("rouge")) {
                 int i = 0;
                 for (Player players : Bukkit.getOnlinePlayers()) {
                     if (TeamSelect.team.containsKey(players)) {
@@ -134,7 +128,7 @@ public class GameListeners implements Listener {
 
 
 
-            } else if (TeamSelect.team.get(player) == "bleu") {
+            } else if (TeamSelect.team.get(player).equals("bleu")) {
                 int i = 0;
                 for (Player players : Bukkit.getOnlinePlayers()) {
                     if (TeamSelect.team.containsKey(players)) {
@@ -149,7 +143,7 @@ public class GameListeners implements Listener {
                     daysRunnable.bluealive = false;
                 }
 
-            } else if (TeamSelect.team.get(player) == "vert") {
+            } else if (TeamSelect.team.get(player).equals("vert")) {
                 int i = 0;
                 for (Player players : Bukkit.getOnlinePlayers()) {
                     if (TeamSelect.team.containsKey(players)) {
@@ -164,7 +158,7 @@ public class GameListeners implements Listener {
                     daysRunnable.greenalive = false;
 
                 }
-            } else if (TeamSelect.team.get(player) == "jaune") {
+            } else if (TeamSelect.team.get(player).equals("jaune")) {
                 int i = 0;
                 for (Player players : Bukkit.getOnlinePlayers()) {
                     if (TeamSelect.team.containsKey(players)) {
@@ -236,7 +230,7 @@ public class GameListeners implements Listener {
             player.setHealth(20);
             player.setFoodLevel(20);
             player.setGameMode(GameMode.SPECTATOR);
-            if(player.getKiller() instanceof Player){
+            if(player.getKiller() != null){
                 Player killer = player.getKiller();
                 if(TeamSelect.team.containsKey(player) && TeamSelect.team.containsKey(killer)){
                     Bukkit.broadcastMessage(TeamChat(player) + "§7 a été tué par " + TeamChat(killer));
@@ -277,13 +271,13 @@ public class GameListeners implements Listener {
         }
 
     private String TeamChat(Player player) {
-        if(TeamSelect.team.get(player) == "rouge"){
+        if(TeamSelect.team.get(player).equals("rouge")){
             return "§c" + player.getName();
-        }else if(TeamSelect.team.get(player) == "bleu"){
+        }else if(TeamSelect.team.get(player).equals("bleu")){
             return "§9" + player.getName();
-        }else if(TeamSelect.team.get(player) == "vert"){
+        }else if(TeamSelect.team.get(player).equals("vert")){
             return "§a" + player.getName();
-        }else if(TeamSelect.team.get(player) == "jaune"){
+        }else if(TeamSelect.team.get(player).equals("jaune")){
             return "§e" + player.getName();
         }
 
@@ -308,10 +302,7 @@ public class GameListeners implements Listener {
 
             //verifie rouge
             if ((player.getLocation().getBlockX() >= rougeMinX && player.getLocation().getBlockX() <= rougeMaxX) && (player.getLocation().getBlockZ() >= rougeMinZ && player.getLocation().getBlockZ() <= rougeMaxZ)) {
-                if (TeamSelect.team.get(player).equalsIgnoreCase("rouge")) {
-
-                } else {
-
+                if (!TeamSelect.team.get(player).equalsIgnoreCase("rouge")) {
                     player.sendMessage(MessageYaml.getValue("messages.pvp.assault-error").replace("{jour}", Main.INSTANCE.getConfig().getString("partie.jour-de-pvp")).replace("&", "§"));
                     double x = Main.INSTANCE.getConfig().getDouble("regions.teams.tp-rouge.x");
                     double y = Main.INSTANCE.getConfig().getDouble("regions.teams.tp-rouge.y");
@@ -326,9 +317,7 @@ public class GameListeners implements Listener {
 
             //verifie bleu
             if ((player.getLocation().getBlockX() >= bleuMinX && player.getLocation().getBlockX() <= bleuMaxX) && (player.getLocation().getBlockZ() >= bleuMinZ && player.getLocation().getBlockZ() <= bleuMaxZ)) {
-                if (TeamSelect.team.get(player).equalsIgnoreCase("bleu")) {
-
-                } else {
+                if (!TeamSelect.team.get(player).equalsIgnoreCase("bleu")) {
 
                     player.sendMessage(MessageYaml.getValue("messages.pvp.assault-error").replace("{jour}", Main.INSTANCE.getConfig().getString("partie.jour-de-pvp")).replace("&", "§"));
                     double x = Main.INSTANCE.getConfig().getDouble("regions.teams.tp-bleu.x");
@@ -343,9 +332,7 @@ public class GameListeners implements Listener {
             }
             //verifie vert
             if ((player.getLocation().getBlockX() >= vertMinX && player.getLocation().getBlockX() <= vertMaxX) && (player.getLocation().getBlockZ() >= vertMinZ && player.getLocation().getBlockZ() <= vertMaxZ)) {
-                if (TeamSelect.team.get(player).equalsIgnoreCase("vert")) {
-
-                } else {
+                if (!TeamSelect.team.get(player).equalsIgnoreCase("vert")) {
 
                     player.sendMessage(MessageYaml.getValue("messages.pvp.assault-error").replace("{jour}", Main.INSTANCE.getConfig().getString("partie.jour-de-pvp")).replace("&", "§"));
                     double x = Main.INSTANCE.getConfig().getDouble("regions.teams.tp-vert.x");
@@ -361,9 +348,7 @@ public class GameListeners implements Listener {
 
             //verifie jaune
             if ((player.getLocation().getBlockX() >= jauneMinX && player.getLocation().getBlockX() <= jauneMaxX) && (player.getLocation().getBlockZ() >= jauneMinZ && player.getLocation().getBlockZ() <= jauneMaxZ)) {
-                if (TeamSelect.team.get(player).equalsIgnoreCase("jaune")) {
-
-                } else {
+                if (!TeamSelect.team.get(player).equalsIgnoreCase("jaune")) {
 
                     player.sendMessage(MessageYaml.getValue("messages.pvp.assault-error").replace("{jour}", Main.INSTANCE.getConfig().getString("partie.jour-de-pvp")).replace("&", "§"));
                     double x = Main.INSTANCE.getConfig().getDouble("regions.teams.tp-jaune.x");
@@ -431,7 +416,6 @@ public class GameListeners implements Listener {
             }
             Player player = event.getPlayer();
             Location loc = event.getBlock().getLocation();
-            ItemStack item = player.getItemInHand();
 
 
             if(event.getBlock().getType() == Material.CHEST){
@@ -460,7 +444,7 @@ public class GameListeners implements Listener {
                             return;
 
                         } else {
-                            if (player.getItemInHand().getType() == Material.DIAMOND_PICKAXE || player.getItemInHand().getType() == Material.GOLD_PICKAXE || player.getItemInHand().getType() == Material.IRON_PICKAXE || player.getItemInHand().getType() == Material.STONE_PICKAXE || player.getItemInHand().getType() == Material.WOOD_PICKAXE) {
+                            if(player.getItemInHand().getType() == Material.DIAMOND_PICKAXE || player.getItemInHand().getType() == Material.GOLD_PICKAXE || player.getItemInHand().getType() == Material.IRON_PICKAXE || player.getItemInHand().getType() == Material.STONE_PICKAXE || player.getItemInHand().getType() == Material.WOOD_PICKAXE) {
                                 if (event.getBlock().getType() == Material.STAINED_GLASS || event.getBlock().getType() == Material.IRON_BLOCK) {
                                     event.setCancelled(true);
                                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.blocks.unbreakable").replace("&", "§"));
@@ -494,9 +478,8 @@ public class GameListeners implements Listener {
                 if(event.isCancelled()){
                     return;
                 }
-                if (TeamSelect.team.get(player).equalsIgnoreCase("rouge")) {
+                if (!TeamSelect.team.get(player).equalsIgnoreCase("rouge")) {
 
-                } else {
 
                     event.setCancelled(true);
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.blocks.region-marge-error").replace("&", "§"));
@@ -549,9 +532,8 @@ public class GameListeners implements Listener {
                 if(event.isCancelled()){
                     return;
                 }
-                if (TeamSelect.team.get(player).equalsIgnoreCase("bleu")) {
+                if (!TeamSelect.team.get(player).equalsIgnoreCase("bleu")) {
 
-                } else {
 
                     event.setCancelled(true);
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.blocks.region-marge-error").replace("&", "§"));
@@ -605,9 +587,7 @@ public class GameListeners implements Listener {
                 if(event.isCancelled()){
                     return;
                 }
-                if (TeamSelect.team.get(player).equalsIgnoreCase("vert")) {
-
-                } else {
+                if (!TeamSelect.team.get(player).equalsIgnoreCase("vert")) {
 
                     event.setCancelled(true);
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.blocks.region-marge-error").replace("&", "§"));
@@ -664,9 +644,8 @@ public class GameListeners implements Listener {
                 if(event.isCancelled()){
                     return;
                 }
-                if (TeamSelect.team.get(player).equalsIgnoreCase("jaune")) {
+                if (!TeamSelect.team.get(player).equalsIgnoreCase("jaune")) {
 
-                } else {
                     event.setCancelled(true);
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.blocks.region-marge-error").replace("&", "§"));
 
@@ -731,9 +710,7 @@ public class GameListeners implements Listener {
                 if(event.isCancelled()){
                     return;
                 }
-                if (TeamSelect.team.get(player).equalsIgnoreCase("rouge")) {
-
-                } else {
+                if (!TeamSelect.team.get(player).equalsIgnoreCase("rouge")) {
 
                     event.setCancelled(true);
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.blocks.region-marge-error").replace("&", "§"));
@@ -771,9 +748,7 @@ public class GameListeners implements Listener {
                 if(event.isCancelled()){
                     return;
                 }
-                if (TeamSelect.team.get(player).equalsIgnoreCase("bleu")) {
-
-                } else {
+                if (!TeamSelect.team.get(player).equalsIgnoreCase("bleu")) {
 
                     event.setCancelled(true);
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.blocks.region-marge-error").replace("&", "§"));
@@ -812,9 +787,7 @@ public class GameListeners implements Listener {
                 if(event.isCancelled()){
                     return;
                 }
-                if (TeamSelect.team.get(player).equalsIgnoreCase("vert")) {
-
-                } else {
+                if (!TeamSelect.team.get(player).equalsIgnoreCase("vert")) {
 
                     event.setCancelled(true);
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.blocks.region-marge-error").replace("&", "§"));
@@ -852,9 +825,7 @@ public class GameListeners implements Listener {
                 if(event.isCancelled()){
                     return;
                 }
-                if (TeamSelect.team.get(player).equalsIgnoreCase("jaune")) {
-
-                } else {
+                if (!TeamSelect.team.get(player).equalsIgnoreCase("jaune")) {
                     event.setCancelled(true);
                     player.sendMessage(Main.getPrefix() + MessageYaml.getValue("messages.blocks.region-marge-error").replace("&", "§"));
 
@@ -873,15 +844,9 @@ public class GameListeners implements Listener {
 
 
             if (event.getPlayer().getWorld() == Bukkit.getWorld(Main.getWorld().getName())) {
-                if (daysRunnable.day >= Main.INSTANCE.getConfig().getInt("partie.jour-nether")) {
-                    if (event.getPlayer() instanceof Player) {
-                        Player player = event.getPlayer();
+                if (!(daysRunnable.day >= Main.INSTANCE.getConfig().getInt("partie.jour-nether"))) {
 
-
-                    }
-                } else {
                     Player player = event.getPlayer();
-                    //player.sendMessage("§c§lERREUR§8» §7Les portails ne sont pas encore activé §c(JOUR " + Main.INSTANCE.getConfig().getInt("partie.jour-nether") + ")");
                     player.sendMessage(MessageYaml.getValue("messages.nether.error-nether").replace("{jour}", Main.INSTANCE.getConfig().getString("partie.jour-nether")).replace("&", "§"));
                     event.setCancelled(true);
 
@@ -897,13 +862,13 @@ public class GameListeners implements Listener {
                 if (TeamSelect.team.containsKey(player)) {
                     event.setCancelled(true);
 
-                    if (TeamSelect.team.get(player) == "rouge") {
+                    if (TeamSelect.team.get(player).equals("rouge")) {
                         Bukkit.broadcastMessage("§c§lRouge §7" + player.getName() + "§8» §7" + str);
-                    } else if (TeamSelect.team.get(player) == "bleu") {
+                    } else if (TeamSelect.team.get(player).equals("bleu")) {
                         Bukkit.broadcastMessage("§9§lBleu §7" + player.getName() + "§8» §7" + str);
-                    } else if (TeamSelect.team.get(player) == "vert") {
+                    } else if (TeamSelect.team.get(player).equals("vert")) {
                         Bukkit.broadcastMessage("§a§lVert §7" + player.getName() + "§8» §7" + str);
-                    } else if (TeamSelect.team.get(player) == "jaune") {
+                    } else if (TeamSelect.team.get(player).equals("jaune")) {
                         Bukkit.broadcastMessage("§e§lJaune §7" + player.getName() + "§8» §7" + str);
                     }
 

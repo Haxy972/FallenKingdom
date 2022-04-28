@@ -11,7 +11,7 @@ import fr.haxy972.fallen.utils.TitleManager;
 
 public class DeathRunnable extends BukkitRunnable {
     int timer = 11;
-    private Player player;
+    private final Player player;
 
     public DeathRunnable(Player player) {
         this.player = player;

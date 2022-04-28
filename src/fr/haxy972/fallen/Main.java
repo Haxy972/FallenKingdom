@@ -79,10 +79,7 @@ public class Main extends JavaPlugin {
     }
 
     public static World getWorld() {
-
-        World world = Bukkit.getWorld(Main.INSTANCE.getConfig().getString("partie.world"));
-
-        return world;
+        return Bukkit.getWorld(Main.INSTANCE.getConfig().getString("partie.world"));
 
     }
 
@@ -93,19 +90,18 @@ public class Main extends JavaPlugin {
         double z = Main.INSTANCE.getConfig().getDouble("locations.lobby.z");
         int pitch = Main.INSTANCE.getConfig().getInt("locations.lobby.pitch");
         int yaw = Main.INSTANCE.getConfig().getInt("locations.lobby.yaw");
-        Location spawn = new Location(getWorld(), x, y, z, yaw, pitch);
 
 
-        return spawn;
+
+        return new Location(getWorld(), x, y, z, yaw, pitch);
 
     }
 
     public static String getPrefix() {
-        String prefix = INSTANCE.getConfig().getString("messages.prefix").replace("&","§");
 
 
 
-        return prefix;
+        return INSTANCE.getConfig().getString("messages.prefix").replace("&","§");
 
     }
 
@@ -115,8 +111,8 @@ public class Main extends JavaPlugin {
         double z = Main.INSTANCE.getConfig().getDouble("locations.spawn-rouge.z");
         int pitch = Main.INSTANCE.getConfig().getInt("locations.spawn-rouge.pitch");
         int yaw = Main.INSTANCE.getConfig().getInt("locations.spawn-rouge.yaw");
-        Location spawn = new Location(Main.getWorld(), x, y, z, yaw, pitch);
-        return spawn;
+
+        return new Location(Main.getWorld(), x, y, z, yaw, pitch);
     }
 
     public static Location getSpawnBlue() {
@@ -125,8 +121,8 @@ public class Main extends JavaPlugin {
         double z = Main.INSTANCE.getConfig().getDouble("locations.spawn-bleu.z");
         int pitch = Main.INSTANCE.getConfig().getInt("locations.spawn-bleu.pitch");
         int yaw = Main.INSTANCE.getConfig().getInt("locations.spawn-bleu.yaw");
-        Location spawn = new Location(Main.getWorld(), x, y, z, yaw, pitch);
-        return spawn;
+
+        return new Location(Main.getWorld(), x, y, z, yaw, pitch);
     }
 
     public static Location getSpawnGreen() {
@@ -135,8 +131,7 @@ public class Main extends JavaPlugin {
         double z = Main.INSTANCE.getConfig().getDouble("locations.spawn-vert.z");
         int pitch = Main.INSTANCE.getConfig().getInt("locations.spawn-vert.pitch");
         int yaw = Main.INSTANCE.getConfig().getInt("locations.spawn-vert.yaw");
-        Location spawn = new Location(Main.getWorld(), x, y, z, yaw, pitch);
-        return spawn;
+        return new Location(Main.getWorld(), x, y, z, yaw, pitch);
     }
 
     public static Location getSpawnYellow() {
@@ -145,10 +140,9 @@ public class Main extends JavaPlugin {
         double z = Main.INSTANCE.getConfig().getDouble("locations.spawn-jaune.z");
         int pitch = Main.INSTANCE.getConfig().getInt("locations.spawn-jaune.pitch");
         int yaw = Main.INSTANCE.getConfig().getInt("locations.spawn-jaune.yaw");
-        Location spawn = new Location(Main.getWorld(), x, y, z, yaw, pitch);
 
 
-        return spawn;
+        return new Location(Main.getWorld(), x, y, z, yaw, pitch);
     }
 
     //EMPLACEMENT BEACON
@@ -157,16 +151,15 @@ public class Main extends JavaPlugin {
         double y = Main.INSTANCE.getConfig().getDouble("locations.beacon-rouge.y");
         double z = Main.INSTANCE.getConfig().getDouble("locations.beacon-rouge.z");
 
-        Location loc = new Location(Main.getWorld(), x, y, z);
-        return loc;
+
+        return new Location(Main.getWorld(), x, y, z);
     }
 
     public static Location getBeaconBlue() {
         double x = Main.INSTANCE.getConfig().getDouble("locations.beacon-bleu.x");
         double y = Main.INSTANCE.getConfig().getDouble("locations.beacon-bleu.y");
         double z = Main.INSTANCE.getConfig().getDouble("locations.beacon-bleu.z");
-        Location loc = new Location(Main.getWorld(), x, y, z);
-        return loc;
+        return new Location(Main.getWorld(), x, y, z);
     }
 
 
@@ -174,15 +167,13 @@ public class Main extends JavaPlugin {
         double x = Main.INSTANCE.getConfig().getDouble("locations.beacon-vert.x");
         double y = Main.INSTANCE.getConfig().getDouble("locations.beacon-vert.y");
         double z = Main.INSTANCE.getConfig().getDouble("locations.beacon-vert.z");
-        Location loc = new Location(Main.getWorld(), x, y, z);
-        return loc;
+        return new Location(Main.getWorld(), x, y, z);
     }
 
     public static Location getBeaconYellow() {
         double x = Main.INSTANCE.getConfig().getDouble("locations.beacon-jaune.x");
         double y = Main.INSTANCE.getConfig().getDouble("locations.beacon-jaune.y");
         double z = Main.INSTANCE.getConfig().getDouble("locations.beacon-jaune.z");
-        Location loc = new Location(Main.getWorld(), x, y, z);
-        return loc;
+        return new Location(Main.getWorld(), x, y, z);
     }
 }

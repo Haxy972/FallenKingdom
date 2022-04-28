@@ -81,7 +81,7 @@ public class onPlayerJoinListener implements Listener {
         im.setDisplayName("§b");
         it.setItemMeta(im);
 
-        if(Main.INSTANCE.getConfig().getBoolean("options.barrier") == true) {
+        if(Main.INSTANCE.getConfig().getBoolean("options.barrier")) {
             for (int i = 0; i < 9; i++) {
 
                 player.getInventory().setItem(i, it);
