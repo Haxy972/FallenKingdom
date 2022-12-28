@@ -3,6 +3,7 @@ package fr.haxy972.fallenkingdom.runnables;
 import fr.haxy972.fallenkingdom.game.GameManager;
 import fr.haxy972.fallenkingdom.teams.TeamManager;
 import fr.haxy972.fallenkingdom.utils.TitleManager;
+import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -24,6 +25,7 @@ public class DeathRunnable extends BukkitRunnable {
     @Override
     public void run() {
         if(gameManager.getTeamManager().getPlayerTeam(player) == null)this.cancel();
+        if(!player.getGameMode().equals(GameMode.SPECTATOR))this.cancel();
         if(!teamManager.getPlayerTeam(player).isAlive()){
             player.sendMessage("§cRéapparition annulé...votre royaume a été détruit");
             player.playSound(player.getLocation(), Sound.NOTE_PLING, 0.3f, 0.3f);

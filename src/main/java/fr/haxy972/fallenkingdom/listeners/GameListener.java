@@ -185,11 +185,13 @@ public class GameListener implements Listener {
                         gameManager.getScoreboardManager().updateTeamAlive();
                         return;
                     }
-                    new DeathRunnable(gameManager, victim).runTaskTimer(Main.getInstance(), 0, 20);
                     Vector vector = new Vector(0, 0, 0).normalize();
                     gameManager.getScoreboardManager().updateGameKillCount(victim);
                     victim.setVelocity(vector);
-                    victim.setGameMode(GameMode.SPECTATOR);
+                    if(!victim.getGameMode().equals(GameMode.SPECTATOR)) {
+                        victim.setGameMode(GameMode.SPECTATOR);
+                        new DeathRunnable(gameManager, victim).runTaskTimer(Main.getInstance(), 0, 20);
+                    }
                     victim.getInventory().clear();
                     victim.closeInventory();
                     if(!victim.getWorld().equals(gameManager.getWorld())){
@@ -284,11 +286,6 @@ public class GameListener implements Listener {
     public void onCreeperExplode(EntityExplodeEvent event) {
         Entity entity = event.getEntity();
         if (entity.getType().equals(EntityType.CREEPER)) {
-            for (Entity entities : event.getLocation().getChunk().getEntities()) {
-                if (entities instanceof Item) {
-                    entities.remove();
-                }
-            }
             for (Block block : event.blockList()) {
                 Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable() {
                     final Material mat = block.getType();
@@ -298,7 +295,11 @@ public class GameListener implements Listener {
                     public void run() {
                         block.getLocation().getBlock().setType(mat);
                         block.getLocation().getBlock().setData(matid);
-
+                        for (Entity entities : event.getLocation().getChunk().getEntities()) {
+                            if (entities instanceof Item) {
+                                entities.remove();
+                            }
+                        }
                     }
                 }, 1 / 1000000000);
 
@@ -395,7 +396,7 @@ public class GameListener implements Listener {
                 Creeper creeper = (Creeper) entity;
                 if(creeper.isPowered()){
                     event.getDrops().clear();
-                    List<ItemStack> drops = getPercentDropItem(30, new ItemCreator(Material.TNT).done());
+                    List<ItemStack> drops = getPercentDropItem(40, new ItemCreator(Material.TNT).done());
                     if(drops != null) {
                         dropItems(drops, entity.getLocation());
                     }
