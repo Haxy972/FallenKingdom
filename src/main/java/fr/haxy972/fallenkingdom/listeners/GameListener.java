@@ -25,6 +25,7 @@ import org.bukkit.event.world.PortalCreateEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class GameListener implements Listener {
@@ -57,7 +58,7 @@ public class GameListener implements Listener {
                         player.teleport(team.getSpawnLocation());
                         TitleManager.sendTitle(player, "§cMort", "§7Vous allez bientôt réapparaître", 20);
                         player.setGameMode(GameMode.SPECTATOR);
-                        new DeathRunnable(gameManager, player).runTaskTimer(Main.getInstance(), 0,20);
+                        new DeathRunnable(gameManager, player).runTaskTimer(Main.getInstance(), 0, 20);
                     }
                 }
             }
@@ -66,7 +67,7 @@ public class GameListener implements Listener {
             gameManager.addSpectatorList(player);
             gameManager.setSpectatorsEffects(player);
             Bukkit.broadcastMessage(player.getName() + " §7regarde la partie");
-            for(Player players : gameManager.getPlayerList()){
+            for (Player players : gameManager.getPlayerList()) {
                 players.hidePlayer(player);
             }
         }
@@ -77,6 +78,34 @@ public class GameListener implements Listener {
 
     @EventHandler
     public void onDamageByEntity(EntityDamageByEntityEvent event) {
+
+        if (event.getDamager() instanceof Arrow) {
+            Arrow arrow = (Arrow) event.getDamager();
+            if (arrow.getShooter() instanceof Player) {
+                Player player = (Player) arrow.getShooter();
+                if (gameManager.getGameDay() >= Days.PVP.getDay()) {
+                    if (event.getEntity() instanceof Player) {
+                        Player victim = (Player) event.getEntity();
+                        DecimalFormat df = new DecimalFormat("0.0");
+
+                        Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable() {
+                            @Override
+                            public void run() {
+                                String damage = df.format((float) (victim.getHealth() / 2));
+                                if(victim.getGameMode().equals(GameMode.SPECTATOR)) damage = "0.0";
+                                player.sendMessage("§eVous avez touché §b" + victim.getName() + "§e, point de vie: §c" + damage + " §c♥");
+                            }
+                        }, 2);
+
+                        return;
+                    }
+                } else {
+                    player.sendMessage("§cCombats Inactifs §8> §b" + Days.PVP.getDay() + " ème jour");
+                    event.setCancelled(true);
+                }
+            }
+        }
+
         if (gameManager.isGameStatut(GameStatut.LOBBY) || !(event.getEntity() instanceof Player) || !(event.getDamager() instanceof Player)) {
             return;
         }
@@ -117,17 +146,22 @@ public class GameListener implements Listener {
 
     }
 
+
+
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         if (gameManager.isGameStatut(GameStatut.LOBBY) || !(event.getEntity() instanceof Player)) {
             return;
         }
         if (event.isCancelled()) return;
+        if(gameManager.isGameStatut(GameStatut.END)){
+            event.setCancelled(true);
+            return;
+        }
         Player victim = (Player) event.getEntity();
         PlayerData victimData = playerDataManager.getPlayerData(victim);
         TeamManager teamManager = gameManager.getTeamManager();
-
-        if (event.getDamage() >= victim.getHealth()) {
+        if (event.getFinalDamage() >= victim.getHealth()) {
             victim.setHealth(victim.getMaxHealth());
             event.setDamage(0);
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable() {
@@ -157,20 +191,24 @@ public class GameListener implements Listener {
                             gameManager.getScoreboardManager().updateGameKillCount(attacker);
                         }
                     } else {
-                        Bukkit.broadcastMessage(gameManager.getTeamManager().getPlayerTeam(victim).getColor() + victim.getName() + "§7 est mort");
+                        if(gameManager.getTeamManager().getPlayerTeam(victim) != null) {
+                            Bukkit.broadcastMessage(gameManager.getTeamManager().getPlayerTeam(victim).getColor() + victim.getName() + "§7 est mort");
+                        }else{
+                            victim.teleport(gameManager.getLobbySpawn());
+                        }
                     }
 
                     victimData.addDeath();
-                    for(ItemStack itemStack : victim.getInventory()){
-                        if(itemStack != null) {
-                            if( !itemStack.getType().equals(Material.AIR)) {
+                    for (ItemStack itemStack : victim.getInventory()) {
+                        if (itemStack != null) {
+                            if (!itemStack.getType().equals(Material.AIR)) {
                                 gameManager.getWorld().dropItemNaturally(victim.getLocation(), itemStack);
                             }
                         }
                     }
-                    for(ItemStack itemStack : victim.getInventory().getArmorContents()){
-                        if(itemStack != null) {
-                            if( !itemStack.getType().equals(Material.AIR)) {
+                    for (ItemStack itemStack : victim.getInventory().getArmorContents()) {
+                        if (itemStack != null) {
+                            if (!itemStack.getType().equals(Material.AIR)) {
                                 gameManager.getWorld().dropItemNaturally(victim.getLocation(), itemStack);
                             }
                         }
@@ -188,13 +226,13 @@ public class GameListener implements Listener {
                     Vector vector = new Vector(0, 0, 0).normalize();
                     gameManager.getScoreboardManager().updateGameKillCount(victim);
                     victim.setVelocity(vector);
-                    if(!victim.getGameMode().equals(GameMode.SPECTATOR)) {
+                    if (!victim.getGameMode().equals(GameMode.SPECTATOR)) {
                         victim.setGameMode(GameMode.SPECTATOR);
                         new DeathRunnable(gameManager, victim).runTaskTimer(Main.getInstance(), 0, 20);
                     }
                     victim.getInventory().clear();
                     victim.closeInventory();
-                    if(!victim.getWorld().equals(gameManager.getWorld())){
+                    if (!victim.getWorld().equals(gameManager.getWorld())) {
                         victim.teleport(teamManager.getPlayerTeam(victim).getSpawnLocation());
                     }
                 }
@@ -212,7 +250,7 @@ public class GameListener implements Listener {
         Block block = event.getBlock();
         Location blockLocation = event.getBlock().getLocation();
 
-        if(locationInArea(blockLocation, getPortalArea())){
+        if (locationInArea(blockLocation, getPortalArea())) {
             event.setCancelled(true);
             Bukkit.broadcastMessage("§cVous ne pouvez pas poser de blocs ici");
         }
@@ -233,7 +271,7 @@ public class GameListener implements Listener {
                 }
             }
         }
-        if(!event.isCancelled()) blocksPlaced.add(blockLocation);
+        if (!event.isCancelled()) blocksPlaced.add(blockLocation);
     }
 
     @EventHandler
@@ -255,13 +293,13 @@ public class GameListener implements Listener {
         Player player = event.getPlayer();
         Team team = gameManager.getTeamManager().getPlayerTeam(player);
         if (team != null) {
-            if(!team.isAlive()){
+            if (!team.isAlive()) {
                 Bukkit.broadcastMessage(team.getColor() + player.getName() + " §7est éliminé");
-            }else{
+            } else {
                 Bukkit.broadcastMessage(team.getColor() + player.getName() + " §7est mort");
             }
-            for(ItemStack items : player.getInventory().getContents()){
-                if(items != null) {
+            for (ItemStack items : player.getInventory().getContents()) {
+                if (items != null) {
                     player.getWorld().dropItemNaturally(player.getLocation(), items);
                 }
             }
@@ -316,22 +354,24 @@ public class GameListener implements Listener {
         Player player = event.getPlayer();
         Block block = event.getClickedBlock();
 
-        if(block != null) {
+        if (block != null) {
             if (block.getType().equals(Material.CHEST)) {
                 Chest chest = (Chest) block.getState();
-                if (getChestItems(chest).size() == 0) {
-                    event.setCancelled(true);
-                    player.sendMessage("§cCe coffre est vide");
+                if(gameManager.getChestGame().contains(chest)) {
+                    if (getChestItems(chest).size() == 0) {
+                        event.setCancelled(true);
+                        player.sendMessage("§cCe coffre est vide");
+                    }
                 }
             }
         }
     }
 
-    public List<ItemStack> getChestItems(Chest chest){
+    public List<ItemStack> getChestItems(Chest chest) {
         List<ItemStack> itemsList = new ArrayList<>();
-        for(ItemStack items : chest.getInventory().getContents()){
-            if(items != null){
-                if(!items.getType().equals(Material.AIR)) {
+        for (ItemStack items : chest.getInventory().getContents()) {
+            if (items != null) {
+                if (!items.getType().equals(Material.AIR)) {
                     itemsList.add(items);
                 }
             }
@@ -344,9 +384,9 @@ public class GameListener implements Listener {
         if (gameManager.isGameStatut(GameStatut.LOBBY)) {
             return;
         }
-        if(gameManager.getGameDay() < Days.PORTALS.getDay()) {
+        if (gameManager.getGameDay() < Days.PORTALS.getDay()) {
             event.setCancelled(true);
-        }else if(event.getBlocks().get(0).getLocation().getX() != gameManager.getNetherPortal().getX() && event.getBlocks().get(0).getLocation().getZ() != gameManager.getNetherPortal().getZ()){
+        } else if (event.getBlocks().get(0).getLocation().getX() != gameManager.getNetherPortal().getX() && event.getBlocks().get(0).getLocation().getZ() != gameManager.getNetherPortal().getZ()) {
             event.setCancelled(true);
         }
     }
@@ -386,18 +426,18 @@ public class GameListener implements Listener {
 
 
     @EventHandler
-    public void entityDeathEvent(EntityDeathEvent event){
+    public void entityDeathEvent(EntityDeathEvent event) {
         if (gameManager.isGameStatut(GameStatut.LOBBY)) {
             return;
         }
         Entity entity = event.getEntity();
-        switch (entity.getType()){
+        switch (entity.getType()) {
             case CREEPER:
                 Creeper creeper = (Creeper) entity;
-                if(creeper.isPowered()){
+                if (creeper.isPowered()) {
                     event.getDrops().clear();
                     List<ItemStack> drops = getPercentDropItem(40, new ItemCreator(Material.TNT).done());
-                    if(drops != null) {
+                    if (drops != null) {
                         dropItems(drops, entity.getLocation());
                     }
                 }
@@ -405,7 +445,7 @@ public class GameListener implements Listener {
             case ENDERMAN:
                 event.getDrops().clear();
                 List<ItemStack> drops = getPercentDropItem(30, new ItemCreator(Material.ENDER_PEARL).done());
-                if(drops != null) {
+                if (drops != null) {
                     dropItems(drops, entity.getLocation());
                 }
                 Random random = new Random();
@@ -416,8 +456,8 @@ public class GameListener implements Listener {
 
     }
 
-    private void dropItems(List<ItemStack> items, Location location){
-        for(ItemStack item : items){
+    private void dropItems(List<ItemStack> items, Location location) {
+        for (ItemStack item : items) {
             location.getWorld().dropItemNaturally(location, item);
         }
     }
@@ -426,7 +466,7 @@ public class GameListener implements Listener {
         Random random = new Random();
         List<ItemStack> droppedItems = Arrays.asList(droppedItem);
         int randPercent = random.nextInt(100);
-        if(randPercent <= percent){
+        if (randPercent <= percent) {
             return droppedItems;
         }
         return null;
@@ -436,7 +476,8 @@ public class GameListener implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         if (gameManager.isGameStatut(GameStatut.LOBBY)) {
             return;
-        }        Player player = event.getPlayer();
+        }
+        Player player = event.getPlayer();
         Block block = event.getBlock();
         Location blockLocation = event.getBlock().getLocation();
 
@@ -448,8 +489,8 @@ public class GameListener implements Listener {
         }
 
 
-        if(locationInArea(blockLocation, gameManager.getBlocksSpawnList())){
-            if(!blocksPlaced.contains(blockLocation)) {
+        if (locationInArea(blockLocation, gameManager.getBlocksSpawnList())) {
+            if (!blocksPlaced.contains(blockLocation)) {
                 event.setCancelled(true);
 
             }
@@ -477,12 +518,12 @@ public class GameListener implements Listener {
                 }
             }
         }
-        if(!event.isCancelled()) blocksPlaced.remove(blockLocation);
+        if (!event.isCancelled()) blocksPlaced.remove(blockLocation);
     }
 
     private List<Location> getPortalArea() {
         List<Location> portalArea = new ArrayList<>();
-        for (int x = -5 ; x <= 5 ; x++) {
+        for (int x = -5; x <= 5; x++) {
             for (int z = -5; z <= 5; z++) {
                 portalArea.add(new Location(gameManager.getNetherPortal().getWorld(), gameManager.getNetherPortal().getX() + x, 0, gameManager.getNetherPortal().getZ() + z));
                 portalArea.add(new Location(gameManager.getEnderPortal().getWorld(), gameManager.getEnderPortal().getX() + x, 0, gameManager.getEnderPortal().getZ() + z));

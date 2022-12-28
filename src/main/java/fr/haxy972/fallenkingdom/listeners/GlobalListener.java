@@ -3,19 +3,18 @@ package fr.haxy972.fallenkingdom.listeners;
 import fr.haxy972.fallenkingdom.Main;
 import fr.haxy972.fallenkingdom.game.GameManager;
 import fr.haxy972.fallenkingdom.game.GameStatut;
+import fr.haxy972.fallenkingdom.runnables.DeathRunnable;
 import fr.haxy972.fallenkingdom.teams.Team;
 import fr.haxy972.fallenkingdom.utils.TitleManager;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class GlobalListener implements Listener {
@@ -99,6 +98,21 @@ public class GlobalListener implements Listener {
     public void onWeatherChange (WeatherChangeEvent event){
         event.setCancelled(true);
     }
+
+    @EventHandler
+    public void onMove(PlayerMoveEvent event){
+        Player player = event.getPlayer();
+        if(player.getLocation().getY() < -10)
+            if(player.getWorld().equals(gameManager.getWorld())) {
+                if (gameManager.isGameStatut(GameStatut.GAME)) {
+                    TitleManager.sendTitle(player, "§cMort", "§7Vous allez bientôt réapparaître", 20);
+                    player.setGameMode(GameMode.SPECTATOR);
+                    new DeathRunnable(gameManager, player).runTaskTimer(Main.getInstance(), 0,20);
+                }
+                player.teleport(gameManager.getLobbySpawn());
+            }
+    }
+
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event){

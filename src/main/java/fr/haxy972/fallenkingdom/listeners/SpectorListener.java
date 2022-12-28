@@ -6,6 +6,8 @@ import fr.haxy972.fallenkingdom.game.GameStatut;
 import fr.haxy972.fallenkingdom.runnables.SneakRunnable;
 import fr.haxy972.fallenkingdom.spectator.SpectatorInventory;
 import org.bukkit.*;
+import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -73,8 +75,9 @@ public class SpectorListener implements Listener {
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
         Action action = event.getAction();
-
+        Block block = event.getClickedBlock();
         if (item == null && action != null) return;
+
 
         if (gameManager.getSpectatorsList().contains(player)) {
             switch (item.getType()) {

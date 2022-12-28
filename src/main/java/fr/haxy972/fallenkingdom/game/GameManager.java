@@ -3,6 +3,7 @@ package fr.haxy972.fallenkingdom.game;
 import fr.haxy972.fallenkingdom.Main;
 import fr.haxy972.fallenkingdom.data.PlayerData;
 import fr.haxy972.fallenkingdom.data.PlayerDataManager;
+import fr.haxy972.fallenkingdom.runnables.AnimalsRunnable;
 import fr.haxy972.fallenkingdom.runnables.GameRunnable;
 import fr.haxy972.fallenkingdom.teams.Team;
 import fr.haxy972.fallenkingdom.teams.TeamManager;
@@ -33,6 +34,7 @@ public class GameManager {
     private final int dayDuration = 15*60;
     private final GameRunnable gameRunnable = new GameRunnable(this);
     private final PlayerRunnable playerRunnable = new PlayerRunnable(this);
+    private final AnimalsRunnable animalsRunnable = new AnimalsRunnable(this);
     private final Location netherPortal;
     private final Location enderPortal;
     private final List<Chest> chestGame = new ArrayList<>();
@@ -54,6 +56,7 @@ public class GameManager {
         registerAllBlocksSpawn();
         netherPortal.getBlock().setType(Material.AIR);
         gameUtils.setEnderPortal(enderPortal, Material.AIR);
+        animalsRunnable.runTaskTimer(Main.getInstance(), 0,20*60);
     }
 
     public boolean isGameStatut(GameStatut statut) {
@@ -228,6 +231,15 @@ public class GameManager {
         inventory.setItem(0, new ItemCreator(Material.COMPASS).setName("§bTéléportation").setLores("§a> §fCliquez pour utiliser").done());
         inventory.setItem(7, new ItemCreator(Material.NETHER_STAR).setName("§cChanger de mode").setLores("§a§l> §fClick to switch mode").done());
         inventory.setItem(8, new ItemCreator(Material.BLAZE_POWDER).setName("§bCachez les spectateurs").setLores("§a§l> §fClick to hide").done());
+        Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                for(Player players : playerList){
+                    players.hidePlayer(player);
+                }
+            }
+        },10);
+
 
     }
 

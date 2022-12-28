@@ -25,6 +25,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 
 public class LobbyListeners implements Listener {
 
@@ -54,6 +55,9 @@ public class LobbyListeners implements Listener {
         player.setMaxHealth(2);
         player.setAllowFlight(false);
         player.setLevel(0);
+        for (PotionEffect potionEffect : player.getActivePotionEffects()) {
+            player.removePotionEffect(potionEffect.getType());
+        }
         player.setGameMode(GameMode.ADVENTURE);
         player.teleport(gameManager.getLobbySpawn());
         gameManager.addGamePlayer(player);
@@ -166,7 +170,7 @@ public class LobbyListeners implements Listener {
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         if (!gameManager.isGameStatut(GameStatut.LOBBY)) return;
-        if(!(event.getEntity() instanceof Player))return;
+        if (!(event.getEntity() instanceof Player)) return;
         event.setCancelled(true);
     }
 

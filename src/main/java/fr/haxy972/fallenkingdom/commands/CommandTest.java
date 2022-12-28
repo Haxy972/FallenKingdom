@@ -3,8 +3,11 @@ package fr.haxy972.fallenkingdom.commands;
 import fr.haxy972.fallenkingdom.game.GameManager;
 import fr.haxy972.fallenkingdom.teams.Team;
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,8 +26,13 @@ public class CommandTest implements CommandExecutor {
         if(args.length > 0) {
             gameManager.getGameRunnable().timer = gameManager.getDayDuration();
         }else{
-            gameManager.getGameUtils().setEnderPortal(gameManager.getEnderPortal(), Material.ENDER_PORTAL);
-            gameManager.getNetherPortal().getBlock().setType(Material.FIRE);
+            for (Chunk chunk : gameManager.getWorld().getLoadedChunks()) {
+                for (BlockState blockState : chunk.getTileEntities()) {
+                    if (blockState instanceof Chest) {
+                        Bukkit.broadcastMessage(blockState.getLocation().toString());
+                    }
+                }
+            }
         }
 
 

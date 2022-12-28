@@ -38,6 +38,7 @@ public class GameRunnable extends BukkitRunnable {
         if (timer >= gameManager.getDayDuration()) {
             gameManager.addGameDay();
             timer = 0;
+            checkRefillChest();
             Bukkit.broadcastMessage(gameManager.getPrefix() + "§bUn nouveau jour se lève nous sommes actuellement au §e§l" + gameManager.getGameDay() + " ème jour");
             playSound(Sound.LEVEL_UP, 1);
             if (gameManager.getGameDay() >= Days.PORTALS.getDay()) {
@@ -76,7 +77,6 @@ public class GameRunnable extends BukkitRunnable {
             }
         }
         setDayCycle();
-        checkRefillChest();
         gameManager.getScoreboardManager().updateGameDayCount(gameManager.getGameDay());
 
         timer++;
@@ -143,30 +143,30 @@ public class GameRunnable extends BukkitRunnable {
     public List<ItemStack> getChestItemsList(int day) {
         Map<ItemStack, Integer> mapItems = new HashMap<>();
 
-        mapItems.put(new ItemCreator(Material.COBBLESTONE, 32).done(), 7);
-        mapItems.put(new ItemCreator(Material.SAND, 16).done(), 5);
-        mapItems.put(new ItemCreator(Material.IRON_SWORD, 1).done(), 3);
-        mapItems.put(new ItemCreator(Material.COOKED_BEEF, 8).done(), 4);
-        mapItems.put(new ItemCreator(Material.BREAD, 8).done(), 8);
-        mapItems.put(new ItemCreator(Material.ARROW, 16).done(), 7);
-        mapItems.put(new ItemCreator(Material.BOW, 1).done(), 3);
-        mapItems.put(new ItemCreator(Material.AIR, 1).done(), 8);
+        mapItems.put(new ItemCreator(Material.COBBLESTONE, 32).done(), 70);
+        mapItems.put(new ItemCreator(Material.SAND, 16).done(), 50);
+        mapItems.put(new ItemCreator(Material.IRON_SWORD, 1).done(), 30);
+        mapItems.put(new ItemCreator(Material.COOKED_BEEF, 8).done(), 40);
+        mapItems.put(new ItemCreator(Material.BREAD, 8).done(), 80);
+        mapItems.put(new ItemCreator(Material.ARROW, 16).done(), 70);
+        mapItems.put(new ItemCreator(Material.BOW, 1).done(), 15);
+        mapItems.put(new ItemCreator(Material.AIR, 1).done(), 80);
 
         if (day >= 3) {
-            mapItems.put(new ItemCreator(Material.DIAMOND_SWORD, 1).done(), 1);
-            mapItems.put(new ItemCreator(Material.GOLDEN_APPLE, 2).done(), 1);
-            mapItems.put(new ItemCreator(Material.LAVA_BUCKET, 1).done(), 2);
-            mapItems.put(new ItemCreator(Material.WATER_BUCKET, 1).done(), 3);
-            mapItems.put(new ItemCreator(Material.DIAMOND_CHESTPLATE, 1).done(), 1);
-            mapItems.put(new ItemCreator(Material.DIAMOND_BOOTS, 1).done(), 1);
-            mapItems.put(new ItemCreator(Material.TORCH, 16).done(), 8);
-            mapItems.put(gameManager.getGameUtils().getPlayerHead("benbilal", "§cTête de Snoob", "§eLe Bouffon du Roi", "§7N'a aucune utilité particulière"), 1);
+            mapItems.put(new ItemCreator(Material.DIAMOND_SWORD, 1).done(), 10);
+            mapItems.put(new ItemCreator(Material.GOLDEN_APPLE, 2).done(), 10);
+            mapItems.put(new ItemCreator(Material.LAVA_BUCKET, 1).done(), 20);
+            mapItems.put(new ItemCreator(Material.WATER_BUCKET, 1).done(), 30);
+            mapItems.put(new ItemCreator(Material.TORCH, 16).done(), 80);
+            mapItems.put(gameManager.getGameUtils().getPlayerHead("benbilal", "§cTête de Snoob", "§eLe Bouffon du Roi", "§7N'a aucune utilité particulière"), 5);
         }
         if (day >= 5) {
-            mapItems.put(new ItemCreator(Material.TNT, 1).done(), 2);
-            mapItems.put(new ItemCreator(Material.GOLDEN_APPLE, 2).done(), 3);
+            mapItems.put(new ItemCreator(Material.TNT, 1).done(), 20);
+            mapItems.put(new ItemCreator(Material.GOLDEN_APPLE, 2).done(), 30);
             mapItems.put(new ItemCreator(Material.IRON_SWORD, 1).setEnchant(Enchantment.FIRE_ASPECT, 1).done(), 1);
-            mapItems.put(new ItemCreator(Material.IRON_SWORD, 1).setEnchant(Enchantment.DAMAGE_ALL, 1).done(), 1);
+            mapItems.put(new ItemCreator(Material.IRON_SWORD, 1).setEnchant(Enchantment.DAMAGE_ALL, 1).done(), 5);
+            mapItems.put(new ItemCreator(Material.DIAMOND_BOOTS, 1).done(), 10);
+            mapItems.put(new ItemCreator(Material.DIAMOND_CHESTPLATE, 1).done(), 2);
         }
         if (day >= 7) {
             mapItems.put(new ItemCreator(Material.TNT, 2).done(), 4);
