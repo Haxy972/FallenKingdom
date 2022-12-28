@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="FallenKingdom:jar">
-    <output-path>$USER_HOME$/Desktop/Output</output-path>
-    <root id="archive" name="FallenKingdom.jar">
-      <element id="module-output" name="FallenKingdom" />
-    </root>
-  </artifact>
-</component>

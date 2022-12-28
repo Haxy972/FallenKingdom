@@ -1,0 +1,19 @@
+name: FallenKingdom
+version: 1.0-SNAPSHOT
+author: Haxy972
+load: POSTWORLD
+main: fr.haxy972.fallenkingdom.Main
+commands:
+  test:
+    description: test
+  stats:
+    description: Voir les statistiques en jeu
+    aliases: statistiques
+  retour:
+    description: retourner au monde d'origine
+  mute:
+    permission: fallen.all
+    description: Permet de mute un joueur
+  team:
+    permission: fallen.all
+    description: Modifier les parametres d'équipe
