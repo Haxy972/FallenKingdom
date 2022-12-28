@@ -168,6 +168,13 @@ public class GameListener implements Listener {
                             }
                         }
                     }
+                    for(ItemStack itemStack : victim.getInventory().getArmorContents()){
+                        if(itemStack != null) {
+                            if( !itemStack.getType().equals(Material.AIR)) {
+                                gameManager.getWorld().dropItemNaturally(victim.getLocation(), itemStack);
+                            }
+                        }
+                    }
                     TitleManager.sendTitle(victim, "§cMort", "§7Vous allez bientôt réapparaître", 20);
                     if (!teamManager.getPlayerTeam(victim).isAlive()) {
                         gameManager.removeGamePlayer(victim);

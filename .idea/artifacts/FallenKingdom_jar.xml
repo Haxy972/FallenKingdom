@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FallenKingdom:jar">
+    <output-path>$PROJECT_DIR$/../../Développement/Minecraft/ITW</output-path>
+    <root id="archive" name="FallenKingdom.jar">
+      <element id="module-output" name="FallenKingdom" />
+    </root>
+  </artifact>
+</component>
