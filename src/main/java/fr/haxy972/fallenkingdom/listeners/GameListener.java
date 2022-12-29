@@ -250,13 +250,13 @@ public class GameListener implements Listener {
         Block block = event.getBlock();
         Location blockLocation = event.getBlock().getLocation();
 
-        if (locationInArea(blockLocation, getPortalArea())) {
+        if (gameManager.getGameUtils().locationInArea(blockLocation, getPortalArea())) {
             event.setCancelled(true);
             Bukkit.broadcastMessage("§cVous ne pouvez pas poser de blocs ici");
         }
 
         for (Team teams : gameManager.getTeamManager().getTeams()) {
-            if (locationInArea(blockLocation, gameManager.getTeamManager().getTeamArea(teams, 5))) {
+            if (gameManager.getGameUtils().locationInArea(blockLocation, gameManager.getTeamManager().getTeamArea(teams, 5))) {
                 if (teams != gameManager.getTeamManager().getPlayerTeam(player)) {
                     if (!block.getType().equals(Material.TNT)) {
                         event.setCancelled(true);
@@ -489,7 +489,7 @@ public class GameListener implements Listener {
         }
 
 
-        if (locationInArea(blockLocation, gameManager.getBlocksSpawnList())) {
+        if (gameManager.getGameUtils().locationInArea(blockLocation, gameManager.getBlocksSpawnList())) {
             if (!blocksPlaced.contains(blockLocation)) {
                 event.setCancelled(true);
 
@@ -497,7 +497,7 @@ public class GameListener implements Listener {
         }
 
         for (Team teams : gameManager.getTeamManager().getTeams()) {
-            if (locationInArea(blockLocation, gameManager.getTeamManager().getTeamArea(teams, 5))) {
+            if (gameManager.getGameUtils().locationInArea(blockLocation, gameManager.getTeamManager().getTeamArea(teams, 5))) {
                 if (teams != gameManager.getTeamManager().getPlayerTeam(player)) {
                     if (!block.getType().equals(Material.TNT) && !block.getType().equals(Material.BEACON)) {
                         event.setCancelled(true);
@@ -532,14 +532,7 @@ public class GameListener implements Listener {
         return portalArea;
     }
 
-    private boolean locationInArea(Location eventLocation, List<Location> locationToLoop) {
-        for (Location locations : locationToLoop) {
-            if (locations.getX() == eventLocation.getX() && locations.getZ() == eventLocation.getZ() && eventLocation.getWorld() == locations.getWorld()) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
 
     @EventHandler
@@ -552,16 +545,16 @@ public class GameListener implements Listener {
         Location playerLocInteger = new Location(player.getWorld(), (int) player.getLocation().getX(), (int) player.getLocation().getY(), (int) player.getLocation().getZ(), player.getLocation().getYaw(), player.getLocation().getPitch());
         if (gameManager.getGameDay() < Days.ASSAULT.getDay()) {
             for (Team teams : gameManager.getTeamManager().getTeams()) {
-                if (locationInArea(playerLocInteger, gameManager.getTeamManager().getTeamArea(teams, 5))) {
+                if (gameManager.getGameUtils().locationInArea(playerLocInteger, gameManager.getTeamManager().getTeamArea(teams, 5))) {
                     if (teams != gameManager.getTeamManager().getPlayerTeam(player)) {
                         Location teleportLocation = new Location(playerLocInteger.getWorld(), playerLocInteger.getX() - 5, teams.getSpawnLocation().getY() + 2, playerLocInteger.getZ(), playerLocInteger.getYaw(), playerLocInteger.getPitch());
-                        if (locationInArea(teleportLocation, gameManager.getTeamManager().getTeamArea(teams, 5))) {
+                        if (gameManager.getGameUtils().locationInArea(teleportLocation, gameManager.getTeamManager().getTeamArea(teams, 5))) {
                             teleportLocation = new Location(playerLocInteger.getWorld(), playerLocInteger.getX(), teams.getSpawnLocation().getY() + 2, playerLocInteger.getZ() - 5, playerLocInteger.getYaw(), playerLocInteger.getPitch());
                         }
-                        if (locationInArea(teleportLocation, gameManager.getTeamManager().getTeamArea(teams, 5))) {
+                        if (gameManager.getGameUtils().locationInArea(teleportLocation, gameManager.getTeamManager().getTeamArea(teams, 5))) {
                             teleportLocation = new Location(playerLocInteger.getWorld(), playerLocInteger.getX(), teams.getSpawnLocation().getY() + 2, playerLocInteger.getZ() + 5, playerLocInteger.getYaw(), playerLocInteger.getPitch());
                         }
-                        if (locationInArea(teleportLocation, gameManager.getTeamManager().getTeamArea(teams, 5))) {
+                        if (gameManager.getGameUtils().locationInArea(teleportLocation, gameManager.getTeamManager().getTeamArea(teams, 5))) {
                             teleportLocation = new Location(playerLocInteger.getWorld(), playerLocInteger.getX() + 5, teams.getSpawnLocation().getY() + 2, playerLocInteger.getZ(), playerLocInteger.getYaw(), playerLocInteger.getPitch());
                         }
                         player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 1f, 1f);

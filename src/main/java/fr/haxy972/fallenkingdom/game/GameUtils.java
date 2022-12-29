@@ -74,4 +74,13 @@ public class GameUtils {
             }
         }
     }
+
+    public boolean locationInArea(Location eventLocation, List<Location> locationToLoop) {
+        for (Location locations : locationToLoop) {
+            if (locations.getX() == eventLocation.getX() && locations.getZ() == eventLocation.getZ() && eventLocation.getWorld() == locations.getWorld()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
